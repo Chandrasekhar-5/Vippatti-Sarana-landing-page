@@ -1,5 +1,5 @@
 export const APK_DOWNLOAD_URL =
-  'https://github.com/jeevansai-hub/Reckon-App/raw/main/releases/reckon-ai-v1.0.apk';
+  'https://nightly.link/Karunakar1326/vippatti_sarana/workflows/build-apk/main/Vippatti-Sarana-APK.zip';
 
 export const GITHUB_REPO_URL =
   'https://github.com/alenalex-009/vippatti_sarana';
