@@ -1,0 +1,6 @@
+{
+  "name": "Vippatti Sarana",
+  "description": "Disaster intelligence and emergency response Android application for risk assessment, safe zone identification, and evacuation routing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
