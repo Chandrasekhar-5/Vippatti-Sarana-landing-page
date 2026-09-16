@@ -38,15 +38,15 @@ export const Navbar: React.FC = () => {
             href="#"
             className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded-lg p-1"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 to-amber-600 flex items-center justify-center text-white shadow-md shadow-red-950/40 border border-red-400/30 group-hover:scale-105 transition-transform duration-200">
-              <Shield className="w-5 h-5" />
+            <div className="w-10 h-10 rounded-full bg-red-600/20 border-2 border-red-500 flex items-center justify-center text-red-500 shadow-md shadow-red-950/40 group-hover:scale-105 transition-transform duration-200">
+              <Shield className="w-5 h-5 fill-red-500" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-bold text-lg tracking-tight text-white group-hover:text-red-400 transition-colors">
+                <span className="font-black text-lg tracking-tight text-white group-hover:text-red-400 transition-colors">
                   Vippatti Sarana
                 </span>
-                <span className="px-1.5 py-0.5 text-[10px] uppercase font-semibold tracking-wider bg-red-500/20 text-red-400 border border-red-500/30 rounded">
+                <span className="px-1.5 py-0.5 text-[10px] uppercase font-bold tracking-wider bg-emerald-500/15 text-[#00E676] border border-emerald-500/30 rounded">
                   Android
                 </span>
               </div>

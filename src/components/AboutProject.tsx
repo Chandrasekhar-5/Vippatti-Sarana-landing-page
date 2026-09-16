@@ -4,34 +4,34 @@ import { TECHNOLOGIES } from '../constants';
 
 export const AboutProject: React.FC = () => {
   return (
-    <section id="pilot" className="py-20 md:py-28 relative border-t border-zinc-900 bg-[#07090d]">
+    <section id="pilot" className="py-20 md:py-28 relative border-t border-zinc-900 bg-[#07090e]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
         {/* Pilot Project Context */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Text Summary */}
           <div className="lg:col-span-7 space-y-6">
-            <span className="text-xs uppercase font-bold tracking-widest text-red-400 bg-red-500/10 px-3 py-1 rounded-full border border-red-500/20">
+            <span className="text-xs uppercase font-extrabold tracking-widest text-[#00E676] bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/30">
               Pilot Initiative
             </span>
 
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight">
               About the Project
             </h2>
 
-            <div className="p-5 rounded-2xl bg-zinc-900/80 border border-red-500/25 relative overflow-hidden">
+            <div className="p-5 rounded-2xl bg-[#0f1420] border border-red-500/30 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-red-600/10 rounded-full blur-2xl pointer-events-none" />
-              <p className="text-lg sm:text-xl text-zinc-100 font-medium leading-relaxed">
+              <p className="text-lg sm:text-xl text-zinc-100 font-semibold leading-relaxed">
                 “Vippatti Sarana is a disaster-management pilot project focused on risk awareness,
                 safe-zone identification, evacuation planning, and emergency assistance.”
               </p>
             </div>
 
-            <p className="text-base text-zinc-400 leading-relaxed">
+            <p className="text-base text-zinc-300 leading-relaxed">
               The current pilot focuses on <strong className="text-white">Idukki, Kerala</strong> — an environmentally sensitive high-altitude region in the Western Ghats prone to intense monsoonal rainfall, slope degradation, landslides, and sudden flash floods.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-              <div className="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800 flex items-start gap-3">
+              <div className="p-4 rounded-xl bg-[#0f1420] border border-zinc-800 flex items-start gap-3">
                 <Mountain className="w-5 h-5 text-amber-400 shrink-0 mt-1" />
                 <div>
                   <h4 className="text-sm font-bold text-white">Rugged Mountain Topology</h4>
@@ -41,7 +41,7 @@ export const AboutProject: React.FC = () => {
                 </div>
               </div>
 
-              <div className="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800 flex items-start gap-3">
+              <div className="p-4 rounded-xl bg-[#0f1420] border border-zinc-800 flex items-start gap-3">
                 <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-1" />
                 <div>
                   <h4 className="text-sm font-bold text-white">Monsoon & Flood Readiness</h4>
@@ -55,13 +55,13 @@ export const AboutProject: React.FC = () => {
 
           {/* Location Focus Graphic */}
           <div className="lg:col-span-5">
-            <div className="p-6 rounded-3xl bg-zinc-900/90 border border-zinc-800 shadow-2xl relative overflow-hidden">
+            <div className="p-6 rounded-3xl bg-[#0f1420] border border-zinc-800 shadow-2xl relative overflow-hidden">
               <div className="flex items-center justify-between pb-4 border-b border-zinc-800">
                 <div className="flex items-center gap-2">
                   <MapPin className="w-4 h-4 text-red-400" />
                   <span className="text-sm font-bold text-white">Active Pilot Zone</span>
                 </div>
-                <span className="text-xs font-mono text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-800">
+                <span className="text-xs font-mono font-bold text-[#00E676] bg-emerald-500/15 px-2.5 py-0.5 rounded border border-emerald-500/30">
                   Field Test Active
                 </span>
               </div>
@@ -87,7 +87,7 @@ export const AboutProject: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="p-3 rounded-xl bg-red-950/30 border border-red-900/50 text-xs text-red-300 leading-normal flex items-start gap-2">
+                <div className="p-3 rounded-xl bg-red-950/40 border border-red-800/60 text-xs text-red-300 leading-normal flex items-start gap-2">
                   <Compass className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
                   <span>
                     Validation test focuses on community evacuation corridors in high-risk taluks including Devikulam, Udumbanchola, and Peermade.
@@ -101,8 +101,8 @@ export const AboutProject: React.FC = () => {
         {/* Compact Technology Strip */}
         <div id="technology" className="pt-8 border-t border-zinc-800/80">
           <div className="flex items-center gap-2 mb-6">
-            <Cpu className="w-4 h-4 text-zinc-400" />
-            <h3 className="text-xs uppercase font-bold tracking-widest text-zinc-400">
+            <Cpu className="w-4 h-4 text-[#00E676]" />
+            <h3 className="text-xs uppercase font-extrabold tracking-widest text-zinc-400">
               Technology Stack
             </h3>
           </div>
@@ -112,11 +112,11 @@ export const AboutProject: React.FC = () => {
             {TECHNOLOGIES.map((tech) => (
               <div
                 key={tech.name}
-                className="px-3.5 py-2 rounded-xl bg-[#0f131d] border border-white/[0.08] hover:border-zinc-700 transition-colors flex items-center gap-2"
+                className="px-3.5 py-2 rounded-xl bg-[#0f1420] border border-zinc-800 hover:border-[#00E676]/40 transition-colors flex items-center gap-2"
                 title={`${tech.category}: ${tech.detail}`}
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
-                <span className="text-sm font-semibold text-zinc-200">{tech.name}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#00E676]" />
+                <span className="text-sm font-bold text-zinc-200">{tech.name}</span>
                 <span className="text-[11px] text-zinc-400 font-mono">({tech.category})</span>
               </div>
             ))}

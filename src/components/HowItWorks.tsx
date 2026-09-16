@@ -6,17 +6,17 @@ const stepIcons = [Search, Compass, ShieldCheck];
 
 export const HowItWorks: React.FC = () => {
   return (
-    <section id="how-it-works" className="py-20 md:py-28 relative border-t border-zinc-900 bg-[#07090d]">
+    <section id="how-it-works" className="py-20 md:py-28 relative border-t border-zinc-900 bg-[#07090e]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-          <span className="text-xs uppercase font-bold tracking-widest text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
+          <span className="text-xs uppercase font-extrabold tracking-widest text-[#00E676] bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/30">
             Rapid Response Workflow
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight">
             How Vippatti Sarana Works
           </h2>
-          <p className="text-base text-zinc-400">
+          <p className="text-base text-zinc-300">
             A three-step paradigm transforming complex telemetry into actionable, life-saving clarity.
           </p>
         </div>
@@ -28,32 +28,34 @@ export const HowItWorks: React.FC = () => {
 
           {HOW_IT_WORKS_STEPS.map((item, idx) => {
             const Icon = stepIcons[idx];
+            const stepAccent = idx === 0 ? 'text-red-400' : idx === 1 ? 'text-amber-400' : 'text-[#00E676]';
+            const iconBg = idx === 0 ? 'bg-red-500/10 text-red-400 border-red-500/30' : idx === 1 ? 'bg-amber-500/10 text-amber-400 border-amber-500/30' : 'bg-emerald-500/10 text-[#00E676] border-emerald-500/30';
             return (
               <div
                 key={item.step}
                 id={`how-it-works-step-${item.step}`}
-                className="relative z-10 p-8 rounded-2xl bg-[#0e121a]/80 border border-white/[0.08] hover:border-zinc-700 transition-all duration-300 shadow-xl shadow-black/30 flex flex-col justify-between group"
+                className="relative z-10 p-8 rounded-2xl bg-[#0f1420] border border-zinc-800/80 hover:border-zinc-700 transition-all duration-300 shadow-xl shadow-black/30 flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <div className="w-14 h-14 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform duration-300">
-                      <Icon className="w-7 h-7 text-amber-400" />
+                    <div className={`w-14 h-14 rounded-2xl border flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300 ${iconBg}`}>
+                      <Icon className="w-7 h-7" />
                     </div>
-                    <span className="text-3xl font-black text-zinc-600 font-mono group-hover:text-zinc-400 transition-colors">
+                    <span className="text-3xl font-black text-zinc-700 font-mono group-hover:text-zinc-500 transition-colors">
                       {item.step}
                     </span>
                   </div>
 
                   <h3 className="text-2xl font-bold text-white mb-3 flex items-center gap-2">
-                    <span className="text-red-400 font-mono text-lg">{item.step} —</span>
+                    <span className={`${stepAccent} font-mono text-lg`}>{item.step} —</span>
                     <span>{item.title}</span>
                   </h3>
 
-                  <p className="text-base text-zinc-200 font-medium mb-3">
+                  <p className="text-base text-zinc-200 font-semibold mb-3">
                     {item.summary}
                   </p>
 
-                  <p className="text-sm text-zinc-400 leading-relaxed">
+                  <p className="text-sm text-zinc-300 leading-relaxed">
                     {item.detail}
                   </p>
                 </div>

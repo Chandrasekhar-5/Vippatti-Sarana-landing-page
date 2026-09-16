@@ -1,19 +1,46 @@
 @import "tailwindcss";
 
 @layer base {
+  :root {
+    --color-bg-deep: #07090e;
+    --color-surface-card: #0f1420;
+    --color-surface-card-hover: #141b2c;
+    --color-border-subtle: #202b3e;
+    --color-mint-accent: #00e676;
+    --color-red-emergency: #dc2626;
+    --color-amber-warning: #f59e0b;
+  }
+
   html {
     scroll-behavior: smooth;
     color-scheme: dark;
   }
   
   body {
-    background-color: #07090d;
+    background-color: #07090e;
     color: #f3f4f6;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
   ::selection {
-    background-color: rgba(239, 68, 68, 0.35);
+    background-color: rgba(0, 230, 118, 0.3);
     color: #ffffff;
   }
 }
+
+/* Custom scrollbars matching the dark tactical aesthetic */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #090c13;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
