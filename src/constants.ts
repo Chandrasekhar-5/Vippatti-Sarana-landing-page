@@ -1,5 +1,5 @@
 export const APK_DOWNLOAD_URL =
-  'https://github.com/alenalex-009/vippatti_sarana/releases/download/SIH/Vippatti_Sarana.v1.0.0.apk';
+  'https://github.com/alenalex-009/vippatti_sarana/releases/download/SIH/Vippatti_Sarana.v1.1.0.apk';
 
 export const GITHUB_REPO_URL =
   'https://github.com/alenalex-009/vippatti_sarana';
