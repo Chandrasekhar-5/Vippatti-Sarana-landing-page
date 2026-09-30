@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { Download, ArrowRight, Shield, AlertTriangle, MapPin, Compass, Navigation, Radio, CheckCircle2 } from 'lucide-react';
+import {
+  Download,
+  ArrowRight,
+  Shield,
+  Compass,
+  Newspaper,
+  BookOpen,
+  User,
+  Building2,
+  CheckCircle2,
+} from 'lucide-react';
 import { APK_DOWNLOAD_URL } from '../constants';
 import { AndroidDevice, PrototypeTab } from './prototype/AndroidDevice';
 
@@ -8,8 +18,8 @@ export const Hero: React.FC = () => {
 
   return (
     <section id="hero" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-[#07090e]">
-      {/* Ambient background glows matching product colors */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[900px] h-[450px] bg-gradient-to-b from-[#00E676]/10 via-red-600/5 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
+      {/* Ambient background glows matching product forest green & emergency accents */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[900px] h-[450px] bg-gradient-to-b from-[#085437]/20 via-[#00E676]/10 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
       <div className="absolute -top-24 right-10 w-96 h-96 bg-red-900/15 rounded-full blur-3xl pointer-events-none -z-10" />
 
       {/* Subtle tactical grid pattern */}
@@ -25,7 +35,7 @@ export const Hero: React.FC = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00E676] opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00E676]" />
               </span>
-              <span>Disaster Intelligence & Emergency Response Pilot</span>
+              <span>Disaster Intelligence & Decision-Support Pilot</span>
             </div>
 
             {/* Main App Name Display */}
@@ -45,9 +55,7 @@ export const Hero: React.FC = () => {
 
             {/* Supporting Text */}
             <p className="text-base sm:text-lg text-zinc-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
-              Vippatti Sarana is a disaster intelligence and emergency response Android application
-              designed to help communities understand risks, identify safer locations, and
-              make informed evacuation decisions.
+              Vippatti Sarana is a disaster intelligence and emergency decision-support Android application that helps people understand hazards around them, evaluate safer locations, plan evacuation routes, and access emergency preparedness tools.
             </p>
 
             {/* Call to Actions */}
@@ -65,10 +73,10 @@ export const Hero: React.FC = () => {
 
                 <a
                   id="hero-explore-features-button"
-                  href="#preview"
+                  href="#features"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-[#0f1420] hover:bg-[#141b2c] text-zinc-200 hover:text-white font-semibold text-base border border-zinc-800 hover:border-zinc-600 transition-all duration-200"
                 >
-                  <span>Explore Prototype</span>
+                  <span>Explore Features</span>
                   <ArrowRight className="w-4 h-4 text-[#00E676] group-hover:translate-x-0.5 transition-transform" />
                 </a>
               </div>
@@ -79,11 +87,11 @@ export const Hero: React.FC = () => {
                 className="text-xs sm:text-sm text-zinc-400 font-medium tracking-wide flex items-center justify-center lg:justify-start gap-2 pt-1"
               >
                 <CheckCircle2 className="w-4 h-4 text-[#00E676] inline" />
-                <span>Official Android APK Release • Free to Download</span>
+                <span>Android • APK • Free to Download</span>
               </p>
             </div>
 
-            {/* Quick Metrics Bar */}
+            {/* Quick Metrics Bar in Forest Green & Crimson */}
             <div className="grid grid-cols-3 gap-4 pt-6 border-t border-zinc-800/80 max-w-xl mx-auto lg:mx-0">
               <div className="text-left">
                 <p className="text-xl sm:text-2xl font-black text-white tracking-tight">OSM + OSRM</p>
@@ -101,8 +109,38 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Right Column: Interactive Android Device Mockup */}
-          <div className="lg:col-span-5 flex justify-center">
+          <div className="lg:col-span-5 flex flex-col items-center justify-center">
             <AndroidDevice currentTab={heroTab} onTabChange={setHeroTab} />
+
+            {/* Quick Screen Pill Selectors under Phone Mockup */}
+            <div className="flex flex-wrap items-center justify-center gap-1.5 mt-4 p-1.5 rounded-2xl bg-[#0f1420] border border-zinc-800 text-[11px] font-bold shadow-md">
+              {(
+                [
+                  { id: 'radar', label: 'Radar Map', icon: Compass },
+                  { id: 'news', label: 'News', icon: Newspaper },
+                  { id: 'instructions', label: 'Manual', icon: BookOpen },
+                  { id: 'profile', label: 'SOS Net', icon: User },
+                  { id: 'authority', label: 'Authority', icon: Building2 },
+                ] as const
+              ).map((tab) => {
+                const active = heroTab === tab.id;
+                const Icon = tab.icon;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setHeroTab(tab.id)}
+                    className={`px-2.5 py-1 rounded-lg flex items-center gap-1 transition-all ${
+                      active
+                        ? 'bg-[#085437] text-white shadow-sm ring-1 ring-emerald-400'
+                        : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+                    }`}
+                  >
+                    <Icon className="w-3 h-3" />
+                    <span>{tab.label}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

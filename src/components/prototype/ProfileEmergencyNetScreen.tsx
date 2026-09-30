@@ -10,57 +10,72 @@ import {
   CheckCircle2,
   Flame,
   Activity,
-  Edit2,
+  Battery,
+  MapPin,
   Check,
 } from 'lucide-react';
 
 export const ProfileEmergencyNetScreen: React.FC = () => {
   const [safeStatus, setSafeStatus] = useState<'safe' | 'assistance'>('safe');
   const [sosActive, setSosActive] = useState<boolean>(false);
+  const [callingLine, setCallingLine] = useState<string | null>(null);
+
+  const emergencyContacts = [
+    { name: 'National Emergency Support', number: '112', type: 'Central Dispatch' },
+    { name: 'DEOC Idukki Disaster Cell', number: '1077', type: 'District Ops' },
+    { name: 'Kerala SDMA Control Room', number: '1070', type: 'State Authority' },
+    { name: 'Emergency Medical Service', number: '108', type: 'Ambulance' },
+  ];
+
+  const handleDial = (number: string) => {
+    setCallingLine(number);
+    setTimeout(() => setCallingLine(null), 2000);
+  };
 
   return (
-    <div className="flex flex-col h-full bg-[#0a0d14] text-white text-[11px] overflow-y-auto select-none font-sans p-3 space-y-3 scrollbar-none">
+    <div className="flex flex-col h-full bg-[#f4f6f4] text-slate-800 text-[11px] overflow-y-auto select-none font-sans p-3 space-y-3 scrollbar-none">
       {/* 1. App Header */}
       <div className="flex items-center justify-between pt-1">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-red-600/30 border-2 border-red-500 flex items-center justify-center text-red-500">
-            <Shield className="w-4 h-4 fill-red-500" />
+          <div className="w-8 h-8 rounded-full bg-red-100 border-2 border-red-500 flex items-center justify-center text-red-600 shadow-xs">
+            <Shield className="w-4 h-4 fill-red-600" />
           </div>
           <div>
-            <span className="text-[9px] font-bold text-red-500 uppercase tracking-widest block">
+            <span className="text-[9px] font-black text-red-600 uppercase tracking-widest block font-mono">
               VIPPATTI SARANA
             </span>
-            <h3 className="font-extrabold text-sm text-white tracking-tight -mt-0.5">
+            <h3 className="font-black text-xs text-slate-900 tracking-tight -mt-0.5">
               Profile & Emergency Net
             </h3>
           </div>
         </div>
 
-        <div className="flex items-center gap-1.5 text-zinc-400">
-          <button className="p-1 hover:text-white rounded">
-            <Sun className="w-4 h-4" />
-          </button>
-          <button className="p-1 hover:text-white rounded">
-            <Settings className="w-4 h-4" />
+        <div className="flex items-center gap-1.5 text-slate-500">
+          <button
+            aria-label="Settings"
+            className="p-1.5 bg-white border border-slate-200 rounded-lg hover:text-slate-900 shadow-2xs"
+          >
+            <Settings className="w-3.5 h-3.5" />
           </button>
         </div>
       </div>
 
-      {/* 2. Distress Signal Center Card */}
-      <div className="relative p-3.5 rounded-2xl bg-gradient-to-br from-red-600 via-red-700 to-red-900 border border-red-400/40 shadow-xl shadow-red-950/60 space-y-2.5 overflow-hidden">
+      {/* 2. Distress Signal Center Card (Matching Screenshot) */}
+      <div className="relative p-3.5 rounded-2xl bg-gradient-to-br from-red-600 via-red-700 to-red-800 text-white shadow-md shadow-red-950/20 space-y-2.5 overflow-hidden">
         {/* Subtle decorative glow */}
         <div className="absolute -top-10 -right-10 w-28 h-28 bg-red-400/20 rounded-full blur-xl pointer-events-none" />
 
         <div className="flex items-center justify-between">
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/40 text-emerald-300 text-[9px] font-bold border border-emerald-400/30">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/40 text-emerald-300 text-[8px] font-extrabold border border-emerald-400/40">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             LIVE RELAY ACTIVE
           </span>
+          <span className="text-[9px] font-mono text-red-100/90">9.85°N, 76.97°E</span>
         </div>
 
         <div>
           <h4 className="font-black text-sm text-white tracking-tight">Distress Signal Center</h4>
-          <p className="text-[10px] text-red-100/90 leading-tight mt-0.5">
+          <p className="text-[9px] text-red-100 leading-tight mt-0.5">
             Dispatches real-time coordinates, battery level & critical medical tags.
           </p>
         </div>
@@ -68,13 +83,17 @@ export const ProfileEmergencyNetScreen: React.FC = () => {
         <div className="space-y-1.5 pt-1">
           <button
             onClick={() => setSosActive(!sosActive)}
-            className="w-full py-2.5 px-3 rounded-xl bg-white hover:bg-zinc-100 text-red-700 font-extrabold text-xs flex items-center justify-center gap-1.5 shadow-lg shadow-black/30 transition-all active:scale-95"
+            className={`w-full py-2.5 px-3 rounded-xl font-black text-xs flex items-center justify-center gap-1.5 shadow-md transition-all active:scale-95 ${
+              sosActive
+                ? 'bg-amber-400 text-slate-950 ring-2 ring-white animate-pulse'
+                : 'bg-white hover:bg-slate-100 text-red-700'
+            }`}
           >
-            <Star className="w-3.5 h-3.5 fill-red-600 text-red-600 animate-spin" />
-            <span>{sosActive ? 'BEACON ACTIVE • TRANSMITTING' : 'BROADCAST SOS WITH LIVE GPS'}</span>
+            <Star className={`w-3.5 h-3.5 fill-current ${sosActive ? 'animate-spin' : ''}`} />
+            <span>{sosActive ? 'BEACON ACTIVE • TRANSMITTING MESH' : 'BROADCAST SOS WITH LIVE GPS'}</span>
           </button>
 
-          <button className="w-full py-1.5 px-3 rounded-xl bg-black/30 hover:bg-black/40 text-white font-semibold text-[10px] flex items-center justify-center gap-1.5 border border-white/10 transition-colors">
+          <button className="w-full py-1.5 px-3 rounded-xl bg-black/25 hover:bg-black/40 text-white font-bold text-[9px] flex items-center justify-center gap-1.5 border border-white/20 transition-colors">
             <span>👤</span>
             <span>REPORT MY SITUATION</span>
           </button>
@@ -82,125 +101,115 @@ export const ProfileEmergencyNetScreen: React.FC = () => {
       </div>
 
       {/* 3. User Profile Card */}
-      <div className="p-3.5 rounded-2xl bg-[#111722] border border-zinc-800 space-y-3">
+      <div className="p-3.5 rounded-2xl bg-white border border-slate-200/90 shadow-xs space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="relative">
-              <div className="w-10 h-10 rounded-full bg-zinc-800 border-2 border-emerald-500/80 flex items-center justify-center font-bold text-white text-xs">
+              <div className="w-10 h-10 rounded-full bg-slate-100 border-2 border-[#085437] flex items-center justify-center font-black text-slate-800 text-xs shadow-xs">
                 AV
               </div>
-              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 ring-2 ring-[#111722]" />
+              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white" />
             </div>
 
             <div>
               <div className="flex items-center gap-1">
-                <span className="font-extrabold text-xs text-white">Aditya Vardhan</span>
-                <span className="w-3.5 h-3.5 rounded-full bg-blue-500 text-white flex items-center justify-center text-[8px] font-bold">
+                <span className="font-black text-xs text-slate-900">Aditya Vardhan</span>
+                <span className="w-3.5 h-3.5 rounded-full bg-blue-600 text-white flex items-center justify-center text-[8px] font-bold">
                   ✓
                 </span>
               </div>
-              <p className="text-[9px] font-mono text-zinc-400 mt-0.5">ID: SARANA-AP-89241</p>
+              <p className="text-[9px] text-slate-500 font-mono">+91 98450 ••••• (Verified Device)</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-red-950/60 border border-red-700/50 text-red-300 text-[9px] font-mono font-bold">
-            <span>O+ POSITIVE</span>
-            <Edit2 className="w-2.5 h-2.5 text-zinc-400 ml-0.5" />
-          </div>
+          <span className="text-[8px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-emerald-50 text-[#085437] border border-emerald-200">
+            Citizen
+          </span>
         </div>
 
-        {/* Safe / Need Assistance Toggle Buttons */}
-        <div className="grid grid-cols-2 gap-2 pt-1">
+        {/* Safety Status Segmented Switch */}
+        <div className="grid grid-cols-2 gap-1 p-1 bg-slate-100 rounded-xl">
           <button
             onClick={() => setSafeStatus('safe')}
-            className={`py-2 rounded-xl text-[10px] font-extrabold flex items-center justify-center gap-1 transition-all ${
+            className={`py-1.5 rounded-lg font-black text-[9px] flex items-center justify-center gap-1 transition-all ${
               safeStatus === 'safe'
-                ? 'bg-[#00E676] text-black shadow-md shadow-emerald-950/50 ring-1 ring-emerald-300'
-                : 'bg-zinc-800/80 text-zinc-400 hover:text-white'
+                ? 'bg-emerald-600 text-white shadow-xs'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            <Check className="w-3 h-3 stroke-[3]" />
+            <Check className="w-3 h-3" />
             <span>I AM SAFE</span>
           </button>
-
           <button
             onClick={() => setSafeStatus('assistance')}
-            className={`py-2 rounded-xl text-[10px] font-extrabold flex items-center justify-center gap-1 transition-all ${
+            className={`py-1.5 rounded-lg font-black text-[9px] flex items-center justify-center gap-1 transition-all ${
               safeStatus === 'assistance'
-                ? 'bg-red-600 text-white shadow-md shadow-red-950/50 ring-1 ring-red-400'
-                : 'bg-zinc-800/80 text-zinc-400 hover:text-white'
+                ? 'bg-red-600 text-white shadow-xs'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             <AlertCircle className="w-3 h-3" />
-            <span>NEED ASSISTANCE</span>
+            <span>NEED HELP</span>
           </button>
         </div>
-      </div>
 
-      {/* 4. Family Dependents & Medical Attention Tag Grid */}
-      <div className="grid grid-cols-2 gap-2">
-        {/* Dependents Box */}
-        <div className="p-3 rounded-xl bg-[#111722] border border-zinc-800/90 space-y-1">
-          <span className="text-[9px] font-semibold text-zinc-400 uppercase tracking-wider block">
-            Family Dependents
-          </span>
-          <div className="flex items-center gap-1 text-[11px] font-bold text-white">
-            <Users className="w-3.5 h-3.5 text-blue-400" />
-            <span>3 Dependents</span>
+        {/* Medical & Telemetry Tags */}
+        <div className="grid grid-cols-3 gap-1.5 text-center text-[9px]">
+          <div className="p-1.5 rounded-lg bg-slate-50 border border-slate-200">
+            <span className="text-[8px] text-slate-400 block uppercase">Blood Group</span>
+            <span className="font-extrabold text-slate-900">O+ (Rh Pos)</span>
           </div>
-          <p className="text-[9px] text-zinc-400 leading-tight">
-            1 Elder, 1 Child (4yo), Spouse
-          </p>
+          <div className="p-1.5 rounded-lg bg-slate-50 border border-slate-200">
+            <span className="text-[8px] text-slate-400 block uppercase">Allergies</span>
+            <span className="font-extrabold text-slate-900">Penicillin</span>
+          </div>
+          <div className="p-1.5 rounded-lg bg-slate-50 border border-slate-200">
+            <span className="text-[8px] text-slate-400 block uppercase">Battery</span>
+            <span className="font-extrabold text-emerald-700">84% • Good</span>
+          </div>
         </div>
 
-        {/* Medical Box */}
-        <div className="p-3 rounded-xl bg-[#111722] border border-zinc-800/90 space-y-1">
-          <span className="text-[9px] font-semibold text-zinc-400 uppercase tracking-wider block">
-            Medical Attention Tag
-          </span>
-          <div className="flex items-center gap-1 text-[11px] font-bold text-red-300">
-            <Activity className="w-3.5 h-3.5 text-red-400" />
-            <span>Asthma / Inhaler</span>
+        {/* ICE Contact */}
+        <div className="p-2 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between text-[9px]">
+          <div>
+            <span className="text-[8px] text-slate-500 font-bold uppercase block">
+              Emergency ICE Contact
+            </span>
+            <span className="font-bold text-slate-800">Pooja Vardhan (Spouse)</span>
           </div>
-          <p className="text-[9px] text-zinc-400 leading-tight">
-            Requires Mobility Support
-          </p>
+          <span className="font-mono text-slate-600 font-semibold">+91 94470 12345</span>
         </div>
       </div>
 
-      {/* 5. Disaster Dispatch (Toll-Free) */}
-      <div className="p-3 rounded-xl bg-[#111722] border border-zinc-800 space-y-2">
+      {/* 4. Priority Emergency Net Contacts */}
+      <div className="p-3.5 rounded-2xl bg-white border border-slate-200/90 shadow-xs space-y-2">
         <div className="flex items-center justify-between">
-          <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-wider">
-            DISASTER DISPATCH (TOLL-FREE)
+          <span className="text-[9px] uppercase font-extrabold text-slate-600 tracking-wider">
+            DIRECT EMERGENCY NET HELPLINES
           </span>
-          <span className="text-[9px] font-bold text-amber-400">Priority Lines</span>
+          <span className="text-[8px] font-mono text-emerald-700 font-bold">1-TAP CALL</span>
         </div>
 
-        <div className="grid grid-cols-3 gap-1.5">
-          <div className="p-2 rounded-lg bg-zinc-900/90 border border-zinc-800 text-center space-y-0.5">
-            <div className="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center mx-auto">
-              <Shield className="w-3 h-3" />
-            </div>
-            <p className="font-black text-[10px] text-white">NDRF 112</p>
-            <p className="text-[8px] text-zinc-400">Disaster Force</p>
-          </div>
+        <div className="space-y-1.5">
+          {emergencyContacts.map((contact) => (
+            <div
+              key={contact.number}
+              className="p-2 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-between text-[9px] transition-colors"
+            >
+              <div>
+                <p className="font-bold text-slate-900 leading-tight">{contact.name}</p>
+                <p className="text-[8px] text-slate-500">{contact.type}</p>
+              </div>
 
-          <div className="p-2 rounded-lg bg-zinc-900/90 border border-zinc-800 text-center space-y-0.5">
-            <div className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto">
-              <Activity className="w-3 h-3" />
+              <button
+                onClick={() => handleDial(contact.number)}
+                className="px-2.5 py-1 rounded-lg bg-[#085437] hover:bg-[#006847] text-white font-extrabold text-[9px] flex items-center gap-1 shadow-2xs transition-transform active:scale-95"
+              >
+                <PhoneCall className="w-2.5 h-2.5" />
+                <span>{callingLine === contact.number ? 'Dialing...' : contact.number}</span>
+              </button>
             </div>
-            <p className="font-black text-[10px] text-white">Ambulance</p>
-            <p className="text-[8px] text-zinc-400">Dial 108</p>
-          </div>
-
-          <div className="p-2 rounded-lg bg-zinc-900/90 border border-zinc-800 text-center space-y-0.5">
-            <div className="w-6 h-6 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center mx-auto">
-              <Flame className="w-3 h-3" />
-            </div>
-            <p className="font-black text-[10px] text-white">Fire 101</p>
-            <p className="text-[8px] text-zinc-400">Rescue Squad</p>
-          </div>
+          ))}
         </div>
       </div>
     </div>

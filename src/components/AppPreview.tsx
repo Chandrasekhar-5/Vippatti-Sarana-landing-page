@@ -4,6 +4,7 @@ import {
   Newspaper,
   BookOpen,
   User,
+  Building2,
   ShieldAlert,
   CheckCircle2,
   HardDrive,
@@ -31,7 +32,7 @@ const TAB_DETAILS: Record<PrototypeTab, TabDetail> = {
   radar: {
     id: 'radar',
     label: 'Radar Map',
-    badge: 'Geospatial Radar & Routing',
+    badge: 'Geospatial Radar & Safe Zones',
     title: 'Live Disaster Radar & Safe Zones',
     description:
       'Continuous location-based risk assessment powered by OSMDroid and OSRM. Maps hazard perimeters, calculates proximity to watched disaster zones, and guides users to verified relief shelters.',
@@ -98,14 +99,34 @@ const TAB_DETAILS: Record<PrototypeTab, TabDetail> = {
     keySpecs: [
       { label: 'Relay Status', value: 'Live GPS Mesh Relay' },
       { label: 'Status Protocol', value: 'I AM SAFE / NEED ASSISTANCE' },
-      { label: 'Priority Lines', value: 'NDRF 112, 108, Fire 101' },
+      { label: 'Priority Lines', value: 'NDRF 112, 1077, 108, Fire 101' },
       { label: 'Medical Tags', value: 'Blood Group & Inhaler Support' },
     ],
     bulletPoints: [
       'Distress Signal Center with one-tap "BROADCAST SOS WITH LIVE GPS" beacon',
       'Immediate safety confirmation toggle allowing users to mark themselves safe or in need',
       'Family dependents registry and urgent medical attention tags (Asthma, Mobility)',
-      'Direct toll-free priority dispatch hotlines: NDRF 112, Ambulance 108, and Fire 101',
+      'Direct toll-free priority dispatch hotlines: NDRF 112, DEOC Idukki 1077, and Ambulance 108',
+    ],
+  },
+  authority: {
+    id: 'authority',
+    label: 'Authority Console',
+    badge: 'Relocation & Shelter Management',
+    title: 'Authority Console & Triage Matrix',
+    description:
+      'Dedicated command interface for field coordinators and district disaster managers. Provides live shelter capacity monitoring, slope vulnerability indexing, and proactive relocation prioritization.',
+    keySpecs: [
+      { label: 'Scope', value: 'Idukki District Operations' },
+      { label: 'Shelter Hubs', value: 'Munnar, Peerumade, Devikulam' },
+      { label: 'Triage Index', value: 'Slope Exposure & Catchment Runoff' },
+      { label: 'Dispatch', value: 'Proactive Relocation Advisories' },
+    ],
+    bulletPoints: [
+      'Real-time shelter capacity and essential supply tracking (water, rations, power)',
+      'Habitation vulnerability matrix calculating slope exposure and runoff hazard',
+      'Priority triage queuing households in hazardous hill slopes for early transit',
+      'One-tap relocation advisory dispatch notifying ground field coordinators',
     ],
   },
 };
@@ -116,8 +137,8 @@ export const AppPreview: React.FC = () => {
 
   return (
     <section id="preview" className="py-20 md:py-28 relative border-t border-zinc-900 bg-[#07090e] overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-gradient-to-b from-[#00E676]/10 via-red-600/5 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
+      {/* Background ambient lighting in product forest green & emerald */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[520px] bg-gradient-to-b from-[#085437]/20 via-[#00E676]/10 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -132,18 +153,19 @@ export const AppPreview: React.FC = () => {
           </h2>
 
           <p className="text-base sm:text-lg text-zinc-300">
-            Real interface screens from the Vippatti Sarana Android release. Tap the tabs on the device or below to inspect each view.
+            Interactive product mockups modeling the Vippatti Sarana Android experience. Tap the tabs on the device or below to inspect each view.
           </p>
         </div>
 
         {/* Prototype Tab Selector Bar */}
-        <div className="flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-2xl bg-[#0f1420] border border-zinc-800/90 max-w-2xl mx-auto mb-12 shadow-lg">
+        <div className="flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-2xl bg-[#0f1420] border border-zinc-800/90 max-w-3xl mx-auto mb-12 shadow-lg">
           {(
             [
               { id: 'radar', label: 'Radar Map', icon: Compass },
               { id: 'news', label: 'News Intelligence', icon: Newspaper },
               { id: 'instructions', label: 'Survival Manual', icon: BookOpen },
               { id: 'profile', label: 'Emergency Net', icon: User },
+              { id: 'authority', label: 'Authority Console', icon: Building2 },
             ] as const
           ).map((t) => {
             const isSelected = activeTab === t.id;
@@ -153,9 +175,9 @@ export const AppPreview: React.FC = () => {
                 key={t.id}
                 id={`preview-selector-${t.id}`}
                 onClick={() => setActiveTab(t.id)}
-                className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all duration-200 flex items-center gap-2 ${
+                className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all duration-200 flex items-center gap-2 ${
                   isSelected
-                    ? 'bg-[#00E676] text-black shadow-lg shadow-emerald-950/60 ring-1 ring-emerald-300'
+                    ? 'bg-[#085437] text-white shadow-lg shadow-emerald-950/60 ring-1 ring-emerald-400'
                     : 'text-zinc-400 hover:text-white hover:bg-zinc-800/60'
                 }`}
               >
@@ -222,14 +244,14 @@ export const AppPreview: React.FC = () => {
               <a
                 href={APK_DOWNLOAD_URL}
                 download
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#00E676] hover:bg-[#00c853] text-black font-extrabold text-sm shadow-lg shadow-emerald-950/50 transition-all transform hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-extrabold text-sm shadow-lg shadow-red-950/50 transition-all transform hover:-translate-y-0.5"
               >
                 <span>Download APK to Test</span>
               </a>
 
               <a
                 href="#technology"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white font-semibold text-sm border border-zinc-800 transition-colors"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#0f1420] hover:bg-[#141b2c] text-zinc-300 hover:text-white font-semibold text-sm border border-zinc-800 transition-colors"
               >
                 <span>View Architecture</span>
               </a>

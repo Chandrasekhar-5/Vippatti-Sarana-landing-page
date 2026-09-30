@@ -21,13 +21,16 @@ export const AboutProject: React.FC = () => {
             <div className="p-5 rounded-2xl bg-[#0f1420] border border-red-500/30 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-red-600/10 rounded-full blur-2xl pointer-events-none" />
               <p className="text-lg sm:text-xl text-zinc-100 font-semibold leading-relaxed">
-                “Vippatti Sarana is a disaster-management pilot project focused on risk awareness,
-                safe-zone identification, evacuation planning, and emergency assistance.”
+                “Vippatti Sarana is a disaster-management pilot project focused on risk awareness, safe-zone identification, evacuation planning, and emergency assistance.”
               </p>
             </div>
 
             <p className="text-base text-zinc-300 leading-relaxed">
               The current pilot focuses on <strong className="text-white">Idukki, Kerala</strong> — an environmentally sensitive high-altitude region in the Western Ghats prone to intense monsoonal rainfall, slope degradation, landslides, and sudden flash floods.
+            </p>
+
+            <p className="text-sm text-zinc-400 leading-relaxed">
+              Engineered as a software decision-support system, Vippatti Sarana bridges the gap between raw geospatial telemetry and practical community readiness. It provides intuitive tools for residents and an Authority Console for field coordinators to track shelter status and triage relocation needs during extreme weather events.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
@@ -44,9 +47,9 @@ export const AboutProject: React.FC = () => {
               <div className="p-4 rounded-xl bg-[#0f1420] border border-zinc-800 flex items-start gap-3">
                 <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-1" />
                 <div>
-                  <h4 className="text-sm font-bold text-white">Monsoon & Flood Readiness</h4>
+                  <h4 className="text-sm font-bold text-white">Decision Support, Not Certified Guarantee</h4>
                   <p className="text-xs text-zinc-400 mt-1">
-                    Pre-emptive warnings coordinated with regional reservoir discharge and cloudburst data.
+                    Designed to assist human decision-making, complementing rather than substituting official public warnings.
                   </p>
                 </div>
               </div>

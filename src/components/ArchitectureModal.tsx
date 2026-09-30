@@ -55,10 +55,10 @@ export const ArchitectureModal: React.FC<ArchitectureModalProps> = ({ isOpen, on
             <div className="p-4 rounded-2xl bg-zinc-900/90 border border-zinc-800 space-y-2">
               <div className="flex items-center gap-2 text-red-400 text-xs font-bold uppercase">
                 <Shield className="w-4 h-4" />
-                <span>2. Intelligence Engine</span>
+                <span>2. Decision-Support Engine</span>
               </div>
               <p className="text-xs text-zinc-300">
-                Risk calculation algorithms evaluate precipitation, slope gradient, and terrain vulnerability. Safe zone selection identifies optimal relief shelters.
+                Risk calculation algorithms evaluate precipitation, slope gradient, and terrain vulnerability. Safe-zone selection identifies optimal relief shelters and supports relocation prioritization.
               </p>
             </div>
 
@@ -66,10 +66,10 @@ export const ArchitectureModal: React.FC<ArchitectureModalProps> = ({ isOpen, on
             <div className="p-4 rounded-2xl bg-zinc-900/90 border border-zinc-800 space-y-2">
               <div className="flex items-center gap-2 text-emerald-400 text-xs font-bold uppercase">
                 <Smartphone className="w-4 h-4" />
-                <span>3. Native Client UI</span>
+                <span>3. Native Android Client & Console</span>
               </div>
               <p className="text-xs text-zinc-300">
-                Built with Kotlin & Jetpack Compose. Utilizes OSMDroid and OSRM for dynamic offline mapping, navigation, and emergency utilities.
+                Built with Kotlin & Jetpack Compose. Utilizes OSMDroid and OSRM for dynamic offline mapping, evacuation navigation, emergency utilities, and the Authority Console.
               </p>
             </div>
           </div>

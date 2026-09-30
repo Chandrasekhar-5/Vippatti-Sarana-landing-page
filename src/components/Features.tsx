@@ -6,6 +6,8 @@ import {
   Route,
   Radio,
   LifeBuoy,
+  Building2,
+  CheckCircle2,
 } from 'lucide-react';
 import { FEATURES, FeatureItem } from '../constants';
 
@@ -25,9 +27,9 @@ export const Features: React.FC = () => {
       <div className="absolute top-1/2 left-0 w-72 h-72 bg-[#00E676]/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-80 h-80 bg-red-600/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <div className="text-center max-w-3xl mx-auto space-y-3">
           <span className="text-xs uppercase font-extrabold tracking-widest text-[#00E676] bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/30">
             Core Capabilities
           </span>
@@ -35,7 +37,7 @@ export const Features: React.FC = () => {
             Designed for Critical Seconds
           </h2>
           <p className="text-base text-zinc-300">
-            Engineered to deliver rapid situational awareness, verified safe zones, and dependable emergency response for communities.
+            Engineered to deliver rapid situational awareness, verified safe zones, and dependable emergency decision support for communities.
           </p>
         </div>
 
@@ -81,6 +83,44 @@ export const Features: React.FC = () => {
               </div>
             );
           })}
+        </div>
+
+        {/* Authority Console Spotlight Banner */}
+        <div className="p-6 sm:p-8 rounded-3xl bg-[#0d121c] border border-zinc-800/90 shadow-xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-red-600/5 rounded-full blur-3xl pointer-events-none" />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            <div className="lg:col-span-8 space-y-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-bold uppercase tracking-wider">
+                <Building2 className="w-3.5 h-3.5" />
+                <span>Authority & Coordination Console</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-white">
+                Shelter Management & Relocation Prioritization
+              </h3>
+              <p className="text-sm text-zinc-300 leading-relaxed">
+                Beyond individual citizens, Vippatti Sarana features an integrated Authority Console for field teams and local emergency managers to monitor shelter occupancy, assess habitation vulnerability, and coordinate relocation prioritization with explainable risk metrics.
+              </p>
+            </div>
+
+            <div className="lg:col-span-4 flex flex-col gap-2.5 sm:border-l sm:border-zinc-800/80 sm:pl-6 text-xs text-zinc-300">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-[#00E676] shrink-0" />
+                <span>Real-time shelter capacity & supplies</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-[#00E676] shrink-0" />
+                <span>Habitation risk & slope exposure scoring</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-[#00E676] shrink-0" />
+                <span>Relocation prioritization triage matrix</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-[#00E676] shrink-0" />
+                <span>Pilot decision-support architecture</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

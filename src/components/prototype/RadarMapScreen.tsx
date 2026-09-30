@@ -4,6 +4,7 @@ import {
   Radio,
   Layers,
   Plus,
+  Minus,
   Footprints,
   AlertTriangle,
   CheckCircle,
@@ -18,252 +19,323 @@ import {
 export const RadarMapScreen: React.FC = () => {
   const [selectedHazard, setSelectedHazard] = useState<string>('Flood');
   const [destinationSet, setDestinationSet] = useState<boolean>(false);
+  const [zoomLevel, setZoomLevel] = useState<number>(1);
 
   return (
-    <div className="flex flex-col h-full bg-[#0a0d14] text-white text-[11px] overflow-y-auto select-none font-sans scrollbar-none">
-      {/* 1. Header: Risk Status & GPS */}
-      <div className="p-3 bg-[#0d121c] border-b border-zinc-800/80 shrink-0">
+    <div className="flex flex-col h-full bg-[#f4f6f4] text-slate-800 text-[11px] overflow-y-auto select-none font-sans scrollbar-none">
+      {/* 1. Top Header: Risk Status & GPS */}
+      <div className="p-3 bg-white border-b border-slate-200/90 shadow-xs shrink-0">
         <div className="flex items-start justify-between gap-2">
-          <div className="flex items-start gap-2">
-            <div className="w-6 h-6 rounded-md bg-emerald-500/20 border border-emerald-500/50 flex items-center justify-center text-emerald-400 font-black text-xs shrink-0 mt-0.5">
+          <div className="flex items-start gap-2.5">
+            <div className="w-7 h-7 rounded-lg bg-emerald-50 border border-emerald-500/40 flex items-center justify-center text-[#085437] font-black text-sm shrink-0 mt-0.5 shadow-xs">
               G
             </div>
             <div>
-              <div className="flex items-center gap-1.5 font-bold tracking-wider text-emerald-400 text-[11px]">
+              <div className="flex items-center gap-1.5 font-extrabold tracking-wider text-[#085437] text-[11px]">
                 <span>RISK GREEN</span>
-                <span className="text-zinc-500">•</span>
-                <span className="text-zinc-300 font-semibold">DEVICE GPS</span>
+                <span className="text-slate-400">•</span>
+                <span className="text-slate-600 font-bold">DEVICE GPS</span>
               </div>
-              <p className="text-[10px] text-zinc-400 line-clamp-2 leading-tight mt-0.5">
+              <p className="text-[10px] text-slate-600 line-clamp-2 leading-tight mt-0.5 font-medium">
                 No active hazard covers your location. Nearest watched area is Puri Cyclone Landfall Watch — Odisha about 365.2 km away. No evacuation needed.
               </p>
             </div>
           </div>
-          <div className="text-red-500 shrink-0 p-1">
+          <div className="text-red-600 shrink-0 p-1">
             <Radio className="w-4 h-4 animate-pulse" />
           </div>
         </div>
 
         {/* Telemetry Filter Chips */}
         <div className="flex items-center gap-1.5 mt-2.5 overflow-x-auto pb-0.5 scrollbar-none text-[9px] font-medium">
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-300 border border-zinc-700/60 shrink-0">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-300/80 shrink-0 font-mono">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
             DATA: CACHED • MOCK ON
           </span>
-          <span className="px-2 py-0.5 rounded-full bg-zinc-900 text-zinc-400 border border-zinc-800 shrink-0">
+          <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200 shrink-0">
             Fires
           </span>
-          <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 shrink-0 font-semibold">
+          <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-[#085437] border border-emerald-300 shrink-0 font-bold">
             Alerts
           </span>
-          <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 shrink-0 font-semibold">
+          <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-[#085437] border border-emerald-300 shrink-0 font-bold">
             My Risk
           </span>
         </div>
 
         {/* Hazard Selector Pills */}
-        <div className="flex items-center gap-1 mt-2 overflow-x-auto pb-1 scrollbar-none text-[9px]">
-          <button className="px-2 py-1 rounded bg-zinc-800/80 text-amber-300 border border-amber-500/30 flex items-center gap-1 shrink-0">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+        <div className="flex items-center gap-1.5 mt-2 overflow-x-auto pb-1 scrollbar-none text-[9px]">
+          <button className="px-2 py-1 rounded-md bg-amber-50 text-amber-900 border border-amber-300 flex items-center gap-1 shrink-0 font-semibold shadow-2xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
             Earthquake
           </button>
           <button
             onClick={() => setSelectedHazard('Flood')}
-            className={`px-2 py-1 rounded flex items-center gap-1 shrink-0 font-semibold transition-colors ${
+            className={`px-2 py-1 rounded-md flex items-center gap-1 shrink-0 font-bold transition-all shadow-2xs ${
               selectedHazard === 'Flood'
-                ? 'bg-blue-600/30 text-blue-300 border border-blue-400'
-                : 'bg-zinc-800/80 text-zinc-400 border border-zinc-700'
+                ? 'bg-blue-600 text-white shadow-xs'
+                : 'bg-white text-slate-700 border border-slate-300'
             }`}
           >
-            <Droplets className="w-2.5 h-2.5 text-blue-400" />
+            <Droplets className="w-2.5 h-2.5" />
             Flood
           </button>
           <button
             onClick={() => setSelectedHazard('Heavy Rainfall')}
-            className={`px-2 py-1 rounded flex items-center gap-1 shrink-0 font-semibold transition-colors ${
+            className={`px-2 py-1 rounded-md flex items-center gap-1 shrink-0 font-bold transition-all shadow-2xs ${
               selectedHazard === 'Heavy Rainfall'
-                ? 'bg-cyan-600/30 text-cyan-300 border border-cyan-400'
-                : 'bg-zinc-800/80 text-zinc-400 border border-zinc-700'
+                ? 'bg-cyan-700 text-white shadow-xs'
+                : 'bg-white text-slate-700 border border-slate-300'
             }`}
           >
-            <CloudRain className="w-2.5 h-2.5 text-cyan-400" />
+            <CloudRain className="w-2.5 h-2.5" />
             Heavy Rainfall
           </button>
-          <button className="px-2 py-1 rounded bg-zinc-800/80 text-zinc-400 border border-zinc-700 flex items-center gap-1 shrink-0">
-            <Mountain className="w-2.5 h-2.5 text-yellow-600" />
+          <button className="px-2 py-1 rounded-md bg-white text-slate-700 border border-slate-300 flex items-center gap-1 shrink-0 font-semibold">
+            <Mountain className="w-2.5 h-2.5 text-amber-700" />
             Landslide
           </button>
-          <button className="px-2 py-1 rounded bg-zinc-800/80 text-purple-300 border border-purple-500/30 flex items-center gap-1 shrink-0">
-            <Wind className="w-2.5 h-2.5 text-purple-400" />
+          <button className="px-2 py-1 rounded-md bg-purple-50 text-purple-900 border border-purple-300 flex items-center gap-1 shrink-0 font-semibold">
+            <Wind className="w-2.5 h-2.5 text-purple-600" />
             Cyclone
           </button>
         </div>
       </div>
 
-      {/* 2. Map Canvas (OSMDroid Simulation) */}
-      <div className="relative h-44 w-full bg-[#111822] overflow-hidden shrink-0 border-b border-zinc-800">
-        {/* Vector Road and Terrain Map Graphics */}
+      {/* 2. Map Canvas (OSMDroid Simulation matching the app) */}
+      <div className="relative h-44 w-full bg-[#e8eee9] overflow-hidden shrink-0 border-b border-slate-200">
+        {/* Realistic OpenStreetMap Style Vector Map */}
         <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
           {/* Subtle Grid Base */}
           <defs>
-            <pattern id="radar-grid" width="24" height="24" patternUnits="userSpaceOnUse">
-              <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#ffffff08" strokeWidth="0.5" />
+            <pattern id="osm-grid" width="28" height="28" patternUnits="userSpaceOnUse">
+              <path d="M 28 0 L 0 0 0 28" fill="none" stroke="#0000000a" strokeWidth="0.5" />
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="#0e141e" />
-          <rect width="100%" height="100%" fill="url(#radar-grid)" />
+          <rect width="100%" height="100%" fill="#edf3ee" />
+          <rect width="100%" height="100%" fill="url(#osm-grid)" />
 
-          {/* Topographic Contours / River */}
+          {/* Forest & Terrain Shading */}
           <path
-            d="M -10,30 Q 70,60 130,40 T 260,70 T 360,50"
+            d="M 0,20 Q 80,5 140,35 T 280,20 T 360,60 L 360,0 L 0,0 Z"
+            fill="#dcfce7"
+            opacity="0.8"
+          />
+          <path
+            d="M 50,120 Q 120,90 200,130 T 360,110 L 360,180 L 0,180 Z"
+            fill="#e2e8f0"
+            opacity="0.6"
+          />
+
+          {/* Rivers & Water (Periyar Catchment style) */}
+          <path
+            d="M -10,35 Q 70,65 130,45 T 250,75 T 370,55"
             fill="none"
-            stroke="#1e3a8a"
-            strokeWidth="7"
-            strokeOpacity="0.4"
+            stroke="#60a5fa"
+            strokeWidth="8"
+            strokeOpacity="0.75"
+          />
+          <path
+            d="M 130,45 Q 160,95 210,120 T 290,165"
+            fill="none"
+            stroke="#93c5fd"
+            strokeWidth="4"
+            strokeOpacity="0.8"
+          />
+
+          {/* Road Network (State Highways & Local Links) */}
+          <path
+            d="M 40,-10 Q 90,80 160,110 T 290,140"
+            fill="none"
+            stroke="#cbd5e1"
+            strokeWidth="5"
           />
           <path
             d="M 40,-10 Q 90,80 160,110 T 290,140"
             fill="none"
-            stroke="#334155"
+            stroke="#ffffff"
             strokeWidth="3"
-            strokeDasharray="4 2"
           />
           <path
             d="M 120,0 L 150,80 L 220,110 L 280,180"
             fill="none"
-            stroke="#475569"
-            strokeWidth="2"
+            stroke="#f59e0b"
+            strokeWidth="3.5"
+            strokeOpacity="0.8"
           />
 
-          {/* Active Hazard Polygon (Flood zone in Assam/Odisha) */}
+          {/* Active Hazard Polygon (Flood zone in watched sector) */}
           <polygon
-            points="180,25 240,40 270,90 210,80 170,50"
-            fill="rgba(239, 68, 68, 0.25)"
-            stroke="#ef4444"
-            strokeWidth="1.5"
-            strokeDasharray="3 2"
+            points="180,25 240,38 275,85 215,82 170,48"
+            fill="rgba(239, 68, 68, 0.2)"
+            stroke="#dc2626"
+            strokeWidth="1.8"
+            strokeDasharray="4 2"
           />
 
           {/* User Location Pulse (Safe) */}
-          <circle cx="110" cy="95" r="16" fill="rgba(0, 230, 118, 0.15)" className="animate-ping" />
-          <circle cx="110" cy="95" r="7" fill="#00e676" stroke="#ffffff" strokeWidth="1.5" />
-          <text x="122" y="99" fill="#00e676" fontSize="9" fontWeight="bold" fontFamily="monospace">
+          <circle cx="110" cy="95" r="16" fill="rgba(8, 84, 55, 0.2)" className="animate-ping" />
+          <circle cx="110" cy="95" r="7" fill="#085437" stroke="#ffffff" strokeWidth="2" />
+          <text x="122" y="99" fill="#085437" fontSize="9" fontWeight="900" fontFamily="sans-serif">
             YOU (Safe)
           </text>
 
+          {/* Evacuation Route Line when destination is selected */}
+          {destinationSet && (
+            <path
+              d="M 110,95 Q 150,110 220,120 T 310,135"
+              fill="none"
+              stroke="#059669"
+              strokeWidth="4"
+              strokeDasharray="6 3"
+              className="animate-pulse"
+            />
+          )}
+
           {/* Hazard Marker */}
-          <circle cx="225" cy="55" r="5" fill="#ef4444" />
-          <text x="210" y="44" fill="#fca5a5" fontSize="8" fontWeight="bold">
-            Puri Watch
+          <circle cx="225" cy="55" r="5" fill="#dc2626" stroke="#ffffff" strokeWidth="1.5" />
+          <text x="200" y="44" fill="#b91c1c" fontSize="8" fontWeight="bold">
+            Puri Watch (365 km)
           </text>
         </svg>
 
         {/* Floating Map Controls */}
-        <div className="absolute right-2.5 top-2.5 flex flex-col gap-1.5">
-          <button className="w-7 h-7 rounded-md bg-[#131a26]/90 border border-zinc-700/80 flex items-center justify-center text-zinc-300 hover:text-white shadow-md">
-            <Layers className="w-3.5 h-3.5" />
-          </button>
-          <button className="w-7 h-7 rounded-md bg-[#131a26]/90 border border-zinc-700/80 flex items-center justify-center text-zinc-300 hover:text-white shadow-md">
+        <div className="absolute right-2.5 top-2.5 flex flex-col gap-1.5 shadow-md">
+          <button
+            onClick={() => setZoomLevel((z) => Math.min(z + 0.2, 1.6))}
+            aria-label="Zoom in"
+            className="w-7 h-7 rounded-md bg-white border border-slate-300 flex items-center justify-center text-slate-700 hover:text-black hover:bg-slate-50 transition-colors"
+          >
             <Plus className="w-3.5 h-3.5" />
+          </button>
+          <button
+            onClick={() => setZoomLevel((z) => Math.max(z - 0.2, 0.8))}
+            aria-label="Zoom out"
+            className="w-7 h-7 rounded-md bg-white border border-slate-300 flex items-center justify-center text-slate-700 hover:text-black hover:bg-slate-50 transition-colors"
+          >
+            <Minus className="w-3.5 h-3.5" />
+          </button>
+          <button
+            aria-label="Map layers"
+            className="w-7 h-7 rounded-md bg-white border border-slate-300 flex items-center justify-center text-slate-700 hover:text-black hover:bg-slate-50 transition-colors"
+          >
+            <Layers className="w-3.5 h-3.5" />
           </button>
         </div>
 
         {/* OSM Attribution Bar */}
-        <div className="absolute bottom-1 left-2 text-[8px] font-mono text-zinc-500 bg-black/60 px-1.5 py-0.5 rounded">
+        <div className="absolute bottom-1 left-2 text-[8px] font-mono text-slate-600 bg-white/90 backdrop-blur-xs px-1.5 py-0.5 rounded border border-slate-200">
           India • osmdroid / OpenStreetMap / OSRM
         </div>
       </div>
 
-      {/* 3. Bottom Sheet: "WHAT SHOULD I DO?" */}
-      <div className="p-3 bg-[#0d121c] flex-1 flex flex-col space-y-3">
+      {/* 3. Bottom Sheet: "WHAT SHOULD I DO?" (Matching Screenshot) */}
+      <div className="p-3 bg-white flex-1 flex flex-col space-y-3">
         {/* Handle */}
-        <div className="w-8 h-1 rounded-full bg-zinc-700 mx-auto -mt-1" />
+        <div className="w-8 h-1 rounded-full bg-slate-300 mx-auto -mt-1" />
 
         {/* Section Headline */}
-        <div>
-          <div className="flex items-center gap-1 text-[9px] uppercase tracking-wider text-zinc-400 font-bold">
+        <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
+          <div className="flex items-center gap-1.5 text-[9px] uppercase tracking-wider text-slate-500 font-extrabold">
             <span>⬡</span>
             <span>WHAT SHOULD I DO?</span>
           </div>
-          <p className="text-[13px] font-black text-[#00E676] tracking-tight mt-0.5">
+          <p className="text-[12px] font-black text-[#085437] tracking-tight mt-0.5">
             NO TRAVEL RESTRICTION — STAY ALERT
           </p>
-          <p className="text-[10px] text-zinc-300 mt-0.5 leading-relaxed">
+          <p className="text-[10px] text-slate-600 mt-0.5 leading-relaxed font-normal">
             No active hazard covers your location. Nearest watched area is Puri Cyclone Landfall Watch — Odisha about 365.2 km away. No evacuation needed. Avoid flooded roads and monitor updates.
           </p>
         </div>
 
         {/* 4. Safe Zones Section */}
-        <div className="space-y-2 pt-1 border-t border-zinc-800/80">
+        <div className="space-y-2 pt-1 border-t border-slate-200">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] uppercase font-bold text-zinc-400 tracking-wider">
+            <span className="text-[10px] uppercase font-bold text-slate-700 tracking-wider">
               SAFE ZONES — TAP TO ROUTE
             </span>
-            <Footprints className="w-3.5 h-3.5 text-zinc-400" />
+            <Footprints className="w-3.5 h-3.5 text-slate-500" />
           </div>
 
           {/* Warning Banner */}
-          <div className="px-2.5 py-1.5 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[9px] font-semibold flex items-center gap-1.5">
-            <AlertTriangle className="w-3 h-3 text-amber-400 shrink-0" />
+          <div className="px-2.5 py-1.5 rounded-lg bg-amber-50 border border-amber-300/80 text-amber-900 text-[9px] font-bold flex items-center gap-1.5 shadow-2xs">
+            <AlertTriangle className="w-3 h-3 text-amber-600 shrink-0" />
             <span>NO FEASIBLE SHELTER — all in danger / full</span>
           </div>
 
           {/* Safe Zone Card 1 */}
-          <div className="p-2.5 rounded-lg bg-[#141a27] border border-zinc-800 space-y-2">
-            <div className="flex items-start justify-between">
+          <div className="p-3 rounded-xl bg-white border border-slate-200/90 shadow-xs space-y-2">
+            <div className="flex items-start justify-between gap-1">
               <div>
-                <p className="font-bold text-[11px] text-white">Dibrugarh University Relief Hall</p>
-                <p className="text-[9px] text-zinc-400">Dibrugarh, Assam — ~8.6 km from flood pocket</p>
+                <p className="font-extrabold text-[11px] text-slate-900">
+                  Dibrugarh University Relief Hall
+                </p>
+                <p className="text-[9px] text-slate-500">
+                  Dibrugarh, Assam — ~8.6 km from flood pocket
+                </p>
               </div>
-              <span className="text-[8px] font-bold text-red-400 bg-red-500/10 px-1.5 py-0.5 rounded border border-red-500/20">
+              <span className="text-[8px] font-extrabold text-red-700 bg-red-50 px-1.5 py-0.5 rounded border border-red-200 shrink-0">
                 ▲ Unreachable
               </span>
             </div>
 
-            <div className="flex items-center justify-between text-[9px] text-zinc-300 font-mono">
-              <span>1629.1 km • ~20111 min walk</span>
-              <span className="text-emerald-400 font-bold bg-emerald-500/10 px-1.5 py-0.2 rounded">
+            <div className="flex items-center justify-between text-[9px] text-slate-700 font-mono">
+              <span className="font-semibold">1629.1 km • ~20111 min walk</span>
+              <span className="text-[#085437] font-extrabold bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
                 OPEN
               </span>
             </div>
 
-            <div className="flex items-center justify-between text-[8px] text-zinc-400">
-              <span>36% full • 320/500 spots free</span>
+            {/* Capacity Progress Bar */}
+            <div className="space-y-1">
+              <div className="flex items-center justify-between text-[8px] text-slate-500">
+                <span>Occupancy</span>
+                <span className="font-bold text-slate-700">36% full • 320/500 spots free</span>
+              </div>
+              <div className="w-full h-1.5 rounded-full bg-slate-100 overflow-hidden">
+                <div className="h-full bg-[#085437] rounded-full w-[36%]" />
+              </div>
             </div>
 
-            <p className="text-[8px] text-zinc-400 font-sans border-t border-zinc-800/60 pt-1">
+            <p className="text-[8px] text-slate-500 border-t border-slate-100 pt-1 leading-tight">
               Water • Food • Power • Medical • Sanitation • Women & children
             </p>
 
             <button
               onClick={() => setDestinationSet(!destinationSet)}
-              className="w-full py-1.5 rounded-md bg-[#00E676] hover:bg-[#00c853] text-black font-extrabold text-[10px] flex items-center justify-center gap-1.5 shadow transition-colors"
+              className={`w-full py-2 rounded-lg font-black text-[10px] flex items-center justify-center gap-1.5 shadow-sm transition-all active:scale-98 ${
+                destinationSet
+                  ? 'bg-[#085437] text-white ring-2 ring-emerald-400'
+                  : 'bg-[#006847] hover:bg-[#085437] text-white'
+              }`}
             >
-              <Navigation className="w-3 h-3 fill-black" />
+              <Navigation className="w-3 h-3 fill-white" />
               <span>{destinationSet ? 'Destination Set (Route Locked)' : 'Set as destination'}</span>
             </button>
           </div>
 
-          {/* Safe Zone Card 2 */}
-          <div className="p-2 rounded-lg bg-[#111622] border border-zinc-800/80 text-[10px]">
+          {/* Safe Zone Card 2 (Idukki Pilot) */}
+          <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-[10px] space-y-1">
             <div className="flex items-center justify-between">
-              <span className="font-bold text-zinc-300">Idukki Bypass Relief Hall</span>
-              <span className="text-[8px] text-red-400 font-semibold">▲ Unreachable</span>
+              <span className="font-extrabold text-slate-800">Idukki Bypass Relief Hall</span>
+              <span className="text-[8px] text-red-600 font-bold bg-red-50 px-1 py-0.5 rounded">
+                ▲ Unreachable
+              </span>
             </div>
-            <p className="text-[9px] text-zinc-500">Kizhakkethala, Idukki, Kerala</p>
-            <p className="text-[9px] text-zinc-400 font-mono mt-0.5">
+            <p className="text-[9px] text-slate-500">Kizhakkethala, Idukki, Kerala</p>
+            <p className="text-[9px] text-slate-600 font-mono">
               1093.1 km • 25% full (225/300 free)
             </p>
           </div>
         </div>
 
         {/* 5. Live WX Weather Bar */}
-        <div className="p-2 rounded-lg bg-[#0e131d] border border-zinc-800/80 text-[9px] font-mono text-zinc-300 flex items-center justify-between">
-          <span className="font-bold text-emerald-400">LIVE WX</span>
+        <div className="p-2 rounded-lg bg-slate-100 border border-slate-200 text-[9px] font-mono text-slate-700 flex items-center justify-between">
+          <span className="font-extrabold text-[#085437]">LIVE WX</span>
           <span>TEMP 32.1°C</span>
           <span>RAIN 0.1 mm/h</span>
           <span>WIND 8 km/h</span>
-          <span className="text-cyan-400">Cooling</span>
+          <span className="text-cyan-700 font-bold">Cooling</span>
         </div>
       </div>
     </div>
