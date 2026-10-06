@@ -63,7 +63,7 @@ function App() {
         </nav>
         <div className="nav-actions">
           <a className="github-link" href="https://github.com/alenalex-009/vippatti_sarana" target="_blank" rel="noreferrer"><Github size={16} /> GitHub</a>
-          <a className="button button-small button-dark" href="#platform">Explore platform <ArrowRight size={15} /></a>
+          <a className="button button-small button-dark" href="https://github.com/alenalex-009/vippatti_sarana/releases/download/SIH/Vippatti_Sarana.v1.1.1.apk">Download APK <ArrowRight size={15} /></a>
         </div>
         <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close menu' : 'Open menu'}>{menuOpen ? <X /> : <Menu />}</button>
       </header>
@@ -78,7 +78,7 @@ function App() {
               <h1>Know the danger.<br /><em>Know where to go.</em><br />Act before it&apos;s too late.</h1>
               <p className="hero-lede">Vippatti Sarana is an India-wide disaster decision-support platform combining hazard intelligence, risk assessment, safe-zone capacity, evacuation routing and preparedness tools in one place.</p>
               <div className="hero-actions">
-                <a className="button button-primary" href="#how-it-works">Explore the platform <ArrowRight size={17} /></a>
+                <a className="button button-primary" href="https://github.com/alenalex-009/vippatti_sarana/releases/download/SIH/Vippatti_Sarana.v1.1.1.apk">Download APK <ArrowRight size={17} /></a>
                 <a className="text-link light-link" href="https://github.com/alenalex-009/vippatti_sarana" target="_blank" rel="noreferrer"><Github size={17} /> View on GitHub</a>
               </div>
               <p className="credibility"><span className="credibility-dot" /> Built for Smart India Hackathon 2026 <i /> Disaster Management</p>
